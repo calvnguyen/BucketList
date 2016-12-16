@@ -1,0 +1,61 @@
+<div id = "top-nav">
+      <a class="div-header" href="#!/dash">Bucket List</a> | <a class="div-header" href="#!/dash">Home</a> | <a class="div-header" href="#!/">Logout</a> 
+
+      <p id="login-text">Welcome <span id="user-text">{{ login_user.name }}</span>!</p>
+</div>
+
+<div id="form-container">
+
+    <div ng-messages="bucketForm.title.$error">
+        <p style="color: red" ng-message="required">Title is required.</p>
+        <p style="color: red" ng-message="minlength">Title's length is too short.</p>
+    </div> 
+     <div ng-messages="bucketForm.description.$error">
+        <p style="color: red" ng-message="required">Description is required.</p>
+        <p style="color: red" ng-message="minlength">Description's length is too short.</p>
+    </div> 
+
+      <div ng-messages="bucketForm.user.$error">
+        <p style="color: red" ng-message="required">User is required.</p>
+    </div> 
+         
+    <p class="underline-text">Tag a bucket item:</p>
+    <form name='bucketForm' ng-submit="addTag()" user-form">
+      <label class="form-label">
+        Title:
+        <input name="title" class="name-text" type="text" ng-model="newTag.title" placeholder="Title" ng-minlength='5' required>
+      </label>
+
+      <label class="form-label">
+        Description: <input name="description" class="name-text" type="text" ng-model="newTag.description" placeholder="Description" ng-minlength='10' required>
+      </label>
+
+      <label class="form-label">
+        User:
+        <select id="option-box" ng-model="newTag._user" name="user" required>
+        <option class="option-text" ng-repeat="user in users" value="{{user._id}}"">{{user.name}}</option>
+      </select>
+
+      </label>
+      <input class="btn btn-primary" type="submit" value="Add To List">
+    </form>
+ </div>
+
+<!-- Lists start here -->
+
+	<div class="list-box">
+    	<p class="underline-text">Before I die I want to...</p>
+    	<ul style="list-style: none">
+    		<li class="dash-bullet" ng-repeat = "item in bucket_items">{{ item._user[0].name }} | {{ item.title }} - {{ item.description }} - <span style="color:#EE7600">{{ item.createdAt | date: "MMMM dd yyyy" }}</span></li>
+
+    	</ul>
+    </div>
+
+  <div class="list-box">
+    	<p class="underline-text">List of other users (Click to view profile)</p>
+    	<ul style="list-style: none">
+    		<li class="dash-bullet" ng-show = "user.name != login_user.name" ng-repeat = "user in users"><a ng-href="#!/user/{{user._id}}"">{{ user.name }}</a></li>
+    	</ul>
+  </div>
+
+
