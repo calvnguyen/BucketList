@@ -13,7 +13,7 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngMessages', 'angularMoment', '
         controller: 'LoginController'
     })
     .when('/user/:id',{
-        templateUrl: 'partials/products.html',
+        templateUrl: 'partials/show.html',
         controller: 'ShowUserController'
     })
     .otherwise({

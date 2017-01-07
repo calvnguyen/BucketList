@@ -3,10 +3,24 @@ myApp.factory('usersFactory', ['$http', function($http) {
 
   var login_user = {};
   var users = [];
+  var users_others = [];
 
   function UsersFactory(){
       var _this = this;
-     this.index = function(callback){
+     this.index_others = function(user_id, callback){
+      $http.get('/users/'+ user_id).then(function(returned_data){
+        // console.log(returned_data);
+        if (typeof(callback) == 'function'){
+          users_others = returned_data.data;
+          callback(users_others);
+        }
+        
+      });
+
+    };
+
+
+    this.index_all = function(callback){
       $http.get('/users').then(function(returned_data){
         console.log(returned_data);
         if (typeof(callback) == 'function'){
@@ -40,8 +54,8 @@ myApp.factory('usersFactory', ['$http', function($http) {
       });
     };
 
-    this.show = function(user_id, callback){
-        $http.get('/users/'+user_id).then(function(returned_data){
+    this.show_user = function(user_id, callback){
+        $http.get('/showuser/'+user_id).then(function(returned_data){
           console.log(returned_data.data);
           if (typeof(callback) == 'function'){
             callback(returned_data.data);
@@ -59,7 +73,8 @@ myApp.factory('usersFactory', ['$http', function($http) {
 
 // Bucket Factory
 myApp.factory('bucketFactory', ['$http', function($http) {
-  var bucket_items = [];
+  var bucket_pending_items = [];
+  var bucket_completed_items = [];
   var bucket_item = {};
 
   function BucketFactory(){
@@ -68,7 +83,21 @@ myApp.factory('bucketFactory', ['$http', function($http) {
       console.log("inside bucket factory");
       console.log(newtag);
       $http.post('/bucket_items/', newtag).then(function(returned_data){
-        console.log("orders controller - back from server")
+        console.log("create bucket factory - back from server");
+        console.log(returned_data.data);
+        if (typeof(callback) == 'function'){
+          bucket_item = returned_data.data;
+          callback(bucket_item);
+        }
+
+      });
+    };
+
+    this.update_status = function(item_id, status, callback){
+      console.log("inside update bucket factory");
+      console.log(status.code);
+      $http.post('/item_update/'+item_id, status).then(function(returned_data){
+        console.log("update status factory - back from server");
         console.log(returned_data.data);
         if (typeof(callback) == 'function'){
           bucket_item = returned_data.data;
@@ -80,6 +109,7 @@ myApp.factory('bucketFactory', ['$http', function($http) {
     
     this.index = function(callback){
       $http.get('/bucket_items').then(function(returned_data){
+        console.log("get bucket items factory - back from server")
         console.log(returned_data);
         bucket_items = returned_data.data;
         callback(bucket_items);
@@ -87,8 +117,20 @@ myApp.factory('bucketFactory', ['$http', function($http) {
 
     };
 
-    this.show = function(user_id, callback){
-        $http.get('/bucket_items/'+user_id).then(function(returned_data){
+    this.show_pending_items = function(user_id, callback){
+        $http.get('/show_pending_items/'+user_id).then(function(returned_data){
+          console.log("show bucket pending items factory - back from server")
+          console.log(returned_data.data);
+          if (typeof(callback) == 'function'){
+            callback(returned_data.data);
+          }
+
+        });
+    };
+
+    this.show_completed_items = function(user_id, callback){
+        $http.get('/show_completed_items/'+user_id).then(function(returned_data){
+          console.log("show bucket completed items factory - back from server")
           console.log(returned_data.data);
           if (typeof(callback) == 'function'){
             callback(returned_data.data);

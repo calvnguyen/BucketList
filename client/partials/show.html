@@ -1,5 +1,5 @@
 <div id = "top-nav">
-      <a class="div-header" href="#!/dash">Bucket List</a> | <a class="div-header" href="#!/dash">Home</a> | <a class="div-header" href="#!/">Logout</a> 
+  <a class="div-header"><span style="font-weight: bold">Bucket List</span></a> | <a class="div-header" href="#!/dash">Home</a> | <a class="div-header" href="#!/">Logout</a> 
 </div>
 
 <h1 id="header-text">Bucket List for <span style="color: blue">{{ user.name }}</span></h1>
@@ -7,7 +7,7 @@
 <div class="list-box">
       <p class="underline-text">Done:</p>
       <ul style="list-style: none">
-        <li class="dash-bullet" ng-if="item.status = 1" ng-repeat = "item in bucket_items">{{ item._user[0].name }} | {{ item.title }} - {{ item.description }} - <span style="color:#EE7600">{{ item.createdAt }}</span></li>
+       <li class="dash-bullet" ng-repeat = "item in completed_items"><input id="checkbox" type="checkbox" ng-checked="item.status" ng-model="status.code" ng-change="changeStatus(item._id, status)">{{ item._created_by.name }} | {{ item.title }} - {{ item.description }} - <span style="color:#EE7600; font-weight: bold">{{ item.createdAt | date: "MMMM dd yyyy" }}</span></li>
 
       </ul>
     </div>
@@ -15,6 +15,6 @@
   <div class="list-box">
       <p class="underline-text">Pending:</p>
       <ul style="list-style: none">
-        <li class="dash-bullet" ng-if="item.status = 0" ng-repeat = "item in bucket_items">{{ item._user[0].name }} | {{ item.title }} - {{ item.description }} - <span style="color:#EE7600">{{ item.createdAt }}</span></li>
+        <li class="dash-bullet" ng-repeat = "item in pending_items"><input id="checkbox" type="checkbox" ng-checked="item.status" ng-model="status.code" ng-change="changeStatus(item._id, status)">{{ item._created_by.name }} | {{ item.title }} - {{ item.description }} - <span style="color:#EE7600; font-weight: bold">{{ item.createdAt | date: "MMMM dd yyyy" }}</span></li>
       </ul>
   </div>

@@ -11,7 +11,7 @@ var path = require('path');
 mongoose.Promise = global.Promise;
 
 // connect to mongoose!
-dbURI = 'mongodb://localhost/bucket_list';
+dbURI = 'mongodb://localhost/mean_bucket_list';
 mongoose.connect(dbURI);
 
 /*

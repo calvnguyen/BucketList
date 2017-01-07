@@ -25,6 +25,7 @@
 
 .list-box{
 	font-family: verdana, arial, sans-serif;
+	margin-top: 50px;
 
 }
 
@@ -48,6 +49,10 @@
 	margin-left: 30px;
 	color: #008B8B;
 
+}
+
+select option[data-default] {
+  color: #888;
 }
 
 .prod-box {
@@ -127,6 +132,10 @@
 
 #orders-table{
 	margin-top: 20px;
+}
+
+#checkbox{
+	margin-right: 5px;
 }
 
 
