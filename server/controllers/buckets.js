@@ -45,6 +45,7 @@ function BucketController(){
 		  					}
 		  					else{
 		  						console.log("add item to a user successfully");
+
 		  					}
 	  					})
 
@@ -77,8 +78,9 @@ function BucketController(){
 		  				
 		  			})
 
-		  			res.json(item);
+		  	
 		  		}
+		  		res.json(item);	
 	  		}
 		})
 
